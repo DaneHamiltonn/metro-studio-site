@@ -32,7 +32,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addShortcode("year", () => String(new Date().getFullYear()));
 
   return {
-    dir: { input: "src", includes: "_includes", data: "_data", output: "_site" },
+    dir: { input: "src", includes: "_includes", data: "_data", output: "_site.nosync" },
     templateFormats: ["njk", "md", "html"],
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",

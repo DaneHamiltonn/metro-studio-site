@@ -52,11 +52,11 @@ cd "/Users/danehamilton/Documents/Metro Studio/Metro Brand" && npm install
 cd "/Users/danehamilton/Documents/Metro Studio/Metro Brand" && npm start
 ```
 
-Then open http://localhost:4173. The page reloads as you edit. `npm run build` writes the finished site to `_site/`.
+Then open http://localhost:4173. The page reloads as you edit. `npm run build` writes the finished site to `_site.nosync/`. The `.nosync` names, here and on `node_modules.nosync`, stop iCloud from offloading those folders, which otherwise freezes the build.
 
 ## Hosting and domain
 
-- **GitHub Pages:** the workflow in `.github/workflows/pages.yml` runs `npm ci && npm run build` and publishes `_site/`. It's free, and HTTPS is enforced.
+- **GitHub Pages:** the workflow in `.github/workflows/pages.yml` runs `npm ci && npm run build` and publishes `_site.nosync/`. It's free, and HTTPS is enforced.
 - **Domain:** `metro-studio.co.uk` is registered and its DNS is managed at **GoDaddy**. Four `A` records point `@` to GitHub (185.199.108–111.153), and `www` is a `CNAME` to `danehamiltonn.github.io`. Microsoft 365 email records (MX, SPF, Autodiscover, Teams) are separate. Don't change them. A backup of the records from before the switch is kept on the Mac as `dns-backup-2026-11-16.md` (not in this public repo).
 
 ## Still to swap in
