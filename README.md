@@ -1,64 +1,67 @@
 # Metro Studio website
 
-The site is plain HTML and CSS, with no build step and nothing to install. Everything that goes online is in **`site/`**.
+Live at **https://metro-studio.co.uk**. Built with [Eleventy](https://www.11ty.dev/), hosted free on GitHub Pages, and edited through a free CMS at **https://metro-studio.co.uk/admin/**.
+
+## Adding and editing projects (the CMS)
+
+1. Go to **metro-studio.co.uk/admin/** and choose **Sign In Using Access Token**.
+2. The first time only, you'll need a GitHub access token:
+   - The sign-in box links straight to GitHub's token page. Or go to GitHub → **Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token**.
+   - **Repository access:** *Only select repositories* → `metro-studio-site`.
+   - **Permissions:** *Contents* → **Read and write**.
+   - Generate it, copy it and paste it into the CMS. Your browser remembers it, so you won't need it again on that device.
+3. Click **Projects → New Project**, fill in the fields, upload screenshots, then **Save**.
+4. About a minute later the website updates itself. You can follow progress on the repository's **Actions** tab.
+
+Tips:
+- **Order** controls the running order (1 first). The first three appear on the home page, and the first six in the Projects menu.
+- **Services** ticks decide which service pages a project appears on.
+- **Status: Concept** marks work that didn't launch. The "Visit the website" button is hidden for concept projects.
+- Uploaded photos are resized and converted to WebP automatically.
+- It's all free: Sveltia CMS is open source, content is stored in this GitHub repository, and GitHub Pages hosts the site.
+
+## How it's organised
 
 ```
-site/
-├── index.html              Home: studio, apps, services, story, contact
-├── enroute/index.html      Enroute product page
-├── mywashingline/          MyWashingLine product page
-├── privacy/                Privacy page for the website and both apps (App Store needs this URL)
-├── 404.html
-├── favicon.svg             The M mark; switches to white in dark mode
-├── robots.txt, sitemap.xml
-└── assets/
-    ├── css/site.css        All styles. Colours are tokens at the top
-    ├── js/site.js          Nav and scroll animations (the site works without it)
-    └── img/                Mark, app icons, Enroute screenshots
-brand/
-├── metro-mark-black.svg    The M mark, redrawn as vector from your logo
-├── metro-mark-white.svg
-├── metro-mark-current.svg  Takes the colour of the surrounding text (for web use)
-└── metro-studio-logo-original.png
+src/
+├── index.njk                 Home
+├── projects/                 One .md file per project (this is what the CMS edits)
+│   └── index.njk             The /projects page
+├── apps/                     /apps, /apps/enroute, /apps/mywashingline
+├── services/                 /services plus one page per service
+├── about/                    /about, /about/skills, /about/contact
+├── privacy.njk, 404.njk
+├── _data/                    site.json (email, URL), serviceList.json, apps.json
+├── _includes/                layouts (base, project, service) and partials (nav, footer, cards)
+├── admin/                    The CMS: index.html and config.yml
+└── assets/                   CSS, JS, images (project screenshots in assets/img/projects)
+brand/                        The M mark as SVG (black, white, current colour) and the original logo
+eleventy.config.js            Build settings
+.github/workflows/pages.yml   Builds and publishes on every push to main
 ```
 
-## Preview it on your Mac
+The old `/enroute/` and `/mywashingline/` addresses redirect to their new homes under `/apps/`.
+
+## Working on your Mac
 
 ```bash
-cd "/Users/danehamilton/Documents/Metro Studio/Metro Brand" && python3 -m http.server 4173 --directory site
+cd "/Users/danehamilton/Documents/Metro Studio/Metro Brand" && npm install
 ```
 
-Then open http://localhost:4173.
+```bash
+cd "/Users/danehamilton/Documents/Metro Studio/Metro Brand" && npm start
+```
 
-## Hosting: GitHub Pages
+Then open http://localhost:4173. The page reloads as you edit. `npm run build` writes the finished site to `_site/`.
 
-The site is published by GitHub Pages from this repository. Every push to `main` runs `.github/workflows/pages.yml`, which publishes **only the `site/` folder**. It's free, and GitHub provides the HTTPS certificate.
+## Hosting and domain
 
-**Updating the site:** edit the files, then commit and push to `main`. The live site updates a minute or two later; progress shows on the repository's **Actions** tab.
+- **GitHub Pages:** the workflow in `.github/workflows/pages.yml` runs `npm ci && npm run build` and publishes `_site/`. It's free, and HTTPS is enforced.
+- **Domain:** `metro-studio.co.uk` is registered and its DNS is managed at **GoDaddy**. Four `A` records point `@` to GitHub (185.199.108–111.153), and `www` is a `CNAME` to `danehamiltonn.github.io`. Microsoft 365 email records (MX, SPF, Autodiscover, Teams) are separate. Don't change them. A backup of the records from before the switch is kept on the Mac as `dns-backup-2026-11-16.md` (not in this public repo).
 
-### Connecting metro-studio.co.uk
+## Still to swap in
 
-Your Microsoft 365 records (MX, Autodiscover, SPF, DKIM, DMARC, SRV) are **not touched**. You only add these, wherever your DNS is managed (Microsoft 365 admin centre → Settings → Domains → DNS records, or your registrar):
-
-| Type | Name | Value |
-|---|---|---|
-| A | @ | 185.199.108.153 |
-| A | @ | 185.199.109.153 |
-| A | @ | 185.199.110.153 |
-| A | @ | 185.199.111.153 |
-| CNAME | www | danehamiltonn.github.io |
-
-1. Screenshot or export your current DNS records first, as a backup.
-2. If there's already an `@` A record or a `www` record (for example from an old website), remove only those.
-3. In the repository, go to **Settings → Pages → Custom domain**, enter `metro-studio.co.uk` and save.
-4. When the certificate is ready (usually within an hour), tick **Enforce HTTPS**.
-
-Links inside the site are relative, so it works both at the github.io address and at your own domain.
-
-## Things to swap in when you have them
-
-- **App Store links:** when each app is live, replace the "Tell me when it launches" / "Join the beta" buttons with Apple's official *Download on the App Store* badge (from developer.apple.com/app-store/marketing/guidelines).
-- **MyWashingLine screenshots:** the phone screens on that page are built in HTML from the app's real features and scoring bands. Once you have real simulator screenshots (460×1000 like Enroute's), they can replace them.
-- **Enroute Lock Screen screenshot:** `live-activity.png` shows the *Allow Live Activities?* prompt. Retake it after tapping **Allow** for a cleaner image.
-- **Privacy page:** this is a plain-English summary based on how the apps work today. Review it before you submit to the App Store, and update it if the apps start collecting anything new.
-- **Social preview image:** a 1200×630 image at `assets/img/og.png`, added as `og:image` on the home page, would make shared links look better.
+- **App Store badges:** replace "Tell me when it launches" / "Join the beta" once each app is live.
+- **MyWashingLine screenshots:** the phone screens are built in HTML. Swap in real screenshots when you have them.
+- **Enroute Lock Screen screenshot:** retake it without the *Allow Live Activities?* prompt.
+- **Project images:** the five case studies use screenshots of each live site's home page. Add more through the CMS gallery: logos, print work, before-and-afters.

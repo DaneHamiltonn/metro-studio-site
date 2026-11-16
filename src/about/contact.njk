@@ -1,0 +1,25 @@
+---
+layout: layouts/base.njk
+title: Contact
+description: Get in touch with Metro Studio in Newcastle. Email hello@metro-studio.co.uk.
+permalink: /about/contact/
+---
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow reveal">Contact</span>
+    <h1 class="display reveal d1" style="max-width: 12ch;">Let's make something <span class="grad-text">people love.</span></h1>
+    <p class="lede reveal d2">A new brand, a website, an app, or just a question: we'd love to hear from you.</p>
+    <a class="mail big reveal d3" href="mailto:{{ site.email }}">{{ site.email }}</a>
+  </div>
+</section>
+
+<section class="section" style="padding-top: clamp(72px, 9vw, 120px);">
+  <div class="wrap">
+    <div class="grid three">
+      <a class="card link-card reveal" href="mailto:{{ site.email }}?subject=New%20project"><span class="eyebrow">Start a project</span><h3 class="h3">Tell us about it</h3><p>What you do, what you need and any deadlines. A rough idea is plenty to start with.</p><span class="link-arrow">Email us</span></a>
+      <a class="card link-card reveal d1" href="mailto:{{ site.email }}?subject=Support%20request"><span class="eyebrow">Existing clients</span><h3 class="h3">Need a quick change?</h3><p>Send the page, the change and when you need it, and we'll take it from there.</p><span class="link-arrow">Request support</span></a>
+      <a class="card link-card reveal d2" href="mailto:{{ site.email }}?subject=App%20feedback"><span class="eyebrow">Our apps</span><h3 class="h3">Enroute &amp; MyWashingLine</h3><p>Feedback, beta access or something not working? We read every message.</p><span class="link-arrow">Send feedback</span></a>
+    </div>
+    <p class="muted center reveal" style="margin-top:48px;">Metro Studio · {{ site.location }}</p>
+  </div>
+</section>

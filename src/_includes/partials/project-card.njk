@@ -1,0 +1,15 @@
+{#- Expects `p` (a project from collections.projects) -#}
+<a class="project-card reveal" href="{{ p.url }}" style="--pc: {{ p.data.accent or '#1c1c1e' }}; --pc-ink: {{ p.data.accent_text or '#ffffff' }};">
+  <div class="pc-media">
+    <div class="browser">
+      <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i>{% if p.data.url %}<span>{{ p.data.url | hostname }}</span>{% endif %}</div>
+      {% if p.data.cover %}<img src="{{ p.data.cover }}" alt="{{ p.data.title }} website" width="1440" height="900" loading="lazy">{% endif %}
+    </div>
+  </div>
+  <div class="pc-copy">
+    <span class="pc-meta">{{ p.data | years }}{% if p.data.status == "Concept" %} · Concept{% endif %}</span>
+    <h3>{{ p.data.title }}</h3>
+    <p>{{ p.data.summary }}</p>
+    {% if p.data.services %}<ul class="pc-tags">{% for s in p.data.services | head(4) %}<li>{{ s }}</li>{% endfor %}</ul>{% endif %}
+  </div>
+</a>

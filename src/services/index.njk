@@ -1,0 +1,41 @@
+---
+layout: layouts/base.njk
+title: Services
+description: Brand design, graphic design, web design, app development and analytics from Metro Studio, an independent design studio in Newcastle.
+permalink: /services/
+---
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow reveal">Services</span>
+    <h1 class="display reveal d1" style="max-width: 13ch;">Everything your brand <span class="grad-text">needs to shine.</span></h1>
+    <p class="lede reveal d2">Brand identity, graphics, websites, apps and analytics for businesses that care how they look. Elegant work that fits its environment, from a shop front to a phone screen.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top: clamp(72px, 9vw, 120px);">
+  <div class="wrap">
+    <div class="service-rows">
+      {%- for s in serviceList %}
+      <a class="service-row reveal" href="/services/{{ s.slug }}/">
+        <span class="n">0{{ loop.index }}</span>
+        <h2>{{ s.name }}</h2>
+        <p>{{ s.blurb }}</p>
+        <span class="go" aria-hidden="true">→</span>
+      </a>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section invert">
+  <div class="wrap">
+    <div class="section-head reveal"><div><span class="eyebrow">How we work</span><h2 class="h2">Not a one-off. A partner.</h2></div></div>
+    <div class="grid three">
+      <div class="card reveal"><h3 class="h3">One studio, end to end</h3><p>Brand, website and marketing from the same team, so everything looks and feels like it belongs together.</p></div>
+      <div class="card reveal d1"><h3 class="h3">In it for the long run</h3><p>Most of our clients have been with us for years. We stay on to manage, update and improve.</p></div>
+      <div class="card reveal d2"><h3 class="h3">Quick when it matters</h3><p>New page, new campaign, new product? Agile businesses get a fast turnaround.</p></div>
+    </div>
+  </div>
+</section>
+
+{% include "partials/contact-cta.njk" %}

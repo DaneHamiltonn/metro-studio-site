@@ -1,0 +1,18 @@
+<footer class="footer">
+  <div class="wrap">
+    <div class="row">
+      <div>
+        <a class="brand" href="/"><svg class="mark-s" aria-hidden="true"><use href="#mark"/></svg>Metro Studio</a>
+        <p style="margin-top:14px;max-width:30ch;">An independent design studio in {{ site.location }}.</p>
+        <p><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+      </div>
+      <div class="cols">
+        <div><h4>Projects</h4><ul><li><a href="/projects/">All projects</a></li>{% for p in collections.projects | head(4) %}<li><a href="{{ p.url }}">{{ p.data.title }}</a></li>{% endfor %}</ul></div>
+        <div><h4>Apps</h4><ul><li><a href="/apps/">All apps</a></li>{% for a in apps %}<li><a href="{{ a.url }}">{{ a.name }}</a></li>{% endfor %}</ul></div>
+        <div><h4>Services</h4><ul>{% for s in serviceList %}<li><a href="/services/{{ s.slug }}/">{{ s.name }}</a></li>{% endfor %}</ul></div>
+        <div><h4>About</h4><ul><li><a href="/about/">Company</a></li><li><a href="/about/skills/">Skills</a></li><li><a href="/about/contact/">Contact</a></li><li><a href="/privacy/">Privacy</a></li></ul></div>
+      </div>
+    </div>
+    <div class="legal"><span>© {% year %} Metro Studio. All rights reserved.</span><span>Made in Newcastle.</span></div>
+  </div>
+</footer>

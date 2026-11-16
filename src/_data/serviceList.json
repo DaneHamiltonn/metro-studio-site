@@ -1,0 +1,7 @@
+[
+  { "name": "Brand design", "slug": "brand-design", "blurb": "Identities, wordmarks and the systems that keep them consistent." },
+  { "name": "Graphic design", "slug": "graphic-design", "blurb": "Print, social, signage and video that look right wherever they land." },
+  { "name": "Web design", "slug": "web-design", "blurb": "Websites and online shops you can run yourself, built from scratch." },
+  { "name": "App development", "slug": "app-development", "blurb": "Native iPhone and iPad apps, designed and built in-house." },
+  { "name": "Analytics", "slug": "analytics", "blurb": "Our specialism. Measurement and insight you can act on." }
+]

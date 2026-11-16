@@ -1,0 +1,43 @@
+---
+layout: layouts/base.njk
+title: Apps
+description: Enroute and MyWashingLine, apps for iPhone and iPad by Metro Studio. Native, honest and private by design.
+permalink: /apps/
+---
+<section class="hero center">
+  <div class="wrap">
+    <div class="app-icons reveal">{% for a in apps %}<img class="app-icon" src="{{ a.icon }}" alt="" width="88" height="88">{% endfor %}</div>
+    <span class="eyebrow reveal">Our apps</span>
+    <h1 class="display reveal d1" style="max-width: 12ch; margin: 0 auto;">Little things, <span class="grad-text">done properly.</span></h1>
+    <p class="lede reveal d2">We make apps for the everyday moments people actually care about. They're native to iPhone, honest about what they know, and private by design.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top: clamp(72px, 9vw, 120px);">
+  <div class="wrap">
+{% include "partials/app-cards.njk" %}
+  </div>
+</section>
+
+<section class="section tight" style="padding-top: 0;">
+  <div class="wrap">
+    <div class="section-head reveal"><div><span class="eyebrow">What they share</span><h2 class="h2">Four promises in every app.</h2></div></div>
+    {% include "partials/principles.njk" %}
+  </div>
+</section>
+
+<section class="section invert">
+  <div class="wrap">
+    <div class="feature" style="align-items:center;">
+      <div class="reveal">
+        <span class="eyebrow">Got an app idea?</span>
+        <h2 class="h2">We'll build yours with the same care.</h2>
+        <p class="lede">From the first prototype to the App Store, we design and build native apps for iPhone and iPad.</p>
+        <div class="actions"><a class="btn large" href="/services/app-development/">App development</a></div>
+      </div>
+      <div class="reveal d1 center"><div class="app-icons big">{% for a in apps %}<img class="app-icon" src="{{ a.icon }}" alt="" width="140" height="140">{% endfor %}</div></div>
+    </div>
+  </div>
+</section>
+
+{% include "partials/contact-cta.njk" %}

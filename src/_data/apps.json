@@ -1,0 +1,4 @@
+[
+  { "name": "Enroute", "url": "/apps/enroute/", "icon": "/assets/img/enroute/icon.png", "blurb": "Know your train. A premium rail companion.", "status": "Coming soon to iPhone" },
+  { "name": "MyWashingLine", "url": "/apps/mywashingline/", "icon": "/assets/img/mywashingline/icon.png", "blurb": "Can you get the washing dry today?", "status": "In beta on iPhone & iPad" }
+]

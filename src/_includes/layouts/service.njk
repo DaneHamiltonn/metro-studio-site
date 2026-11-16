@@ -1,0 +1,65 @@
+---
+layout: layouts/base.njk
+---
+<section class="hero">
+  <div class="wrap">
+    <a class="back reveal" href="/services/">All services</a>
+    <span class="eyebrow reveal">{{ title }}</span>
+    <h1 class="display reveal d1" style="max-width: 14ch;">{{ headline | safe }}</h1>
+    <p class="lede reveal d2">{{ intro }}</p>
+    <div class="actions reveal d3"><a class="btn large" href="mailto:{{ site.email }}?subject={{ title | urlencode }}%20enquiry">Talk to us about {{ title | lower }}</a></div>
+  </div>
+</section>
+
+<section class="section" style="padding-top: clamp(72px, 9vw, 120px);">
+  <div class="wrap">
+    <div class="section-head reveal"><div><span class="eyebrow">What's included</span><h2 class="h2">{{ includesTitle or "Everything you need, nothing you don't." }}</h2></div></div>
+    <div class="grid three">
+      {%- for i in includes %}
+      <div class="card reveal{% if loop.index0 % 3 == 1 %} d1{% elif loop.index0 % 3 == 2 %} d2{% endif %}"><h3 class="h3">{{ i.title }}</h3><p>{{ i.text }}</p></div>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+{% if process %}
+<section class="section invert">
+  <div class="wrap">
+    <div class="section-head reveal"><div><span class="eyebrow">How it works</span><h2 class="h2">{{ processTitle or "A clear process, start to finish." }}</h2></div></div>
+    <ol class="steps">
+      {%- for s in process %}
+      <li class="reveal"><span class="n">{{ loop.index }}</span><h3>{{ s.title }}</h3><p>{{ s.text }}</p></li>
+      {%- endfor %}
+    </ol>
+  </div>
+</section>
+{% endif %}
+
+{{ content | safe }}
+
+{%- set related = collections.projects | withService(title) -%}
+{% if related.length %}
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal"><div><span class="eyebrow">In practice</span><h2 class="h2">{{ title }} in our projects.</h2></div><a class="link-arrow" href="/projects/">All projects</a></div>
+    <div class="project-grid compact">
+      {%- for p in related | head(4) %}
+      {% include "partials/project-card.njk" %}
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="section tight" style="background: var(--bg-alt);">
+  <div class="wrap">
+    <div class="section-head reveal"><div><span class="eyebrow">More services</span><h2 class="h2">Better together.</h2></div></div>
+    <div class="service-links light">
+      {%- for s in serviceList %}{% if s.name != title %}
+      <a class="service-link reveal" href="/services/{{ s.slug }}/"><b>{{ s.name }}</b><span class="d">{{ s.blurb }}</span></a>
+      {%- endif %}{% endfor %}
+    </div>
+  </div>
+</section>
+
+{% include "partials/contact-cta.njk" %}

@@ -1,0 +1,63 @@
+{%- set here = page.url -%}
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Metro Studio home"><svg class="mark-s" aria-hidden="true"><use href="#mark"/></svg>Metro Studio</a>
+    <button class="menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="nav-links"><span></span><span></span></button>
+    <nav class="nav-links" id="nav-links" aria-label="Main">
+      <ul>
+        <li class="has-menu{% if here.startsWith('/projects/') %} current{% endif %}">
+          <a class="top" href="/projects/">Projects</a>
+          <div class="menu">
+            <div class="menu-inner">
+              <a class="menu-lead" href="/projects/"><b>All projects</b><span>Brand, web and e-commerce work for businesses across the North East and beyond.</span></a>
+              <ul class="menu-list">
+                {%- for p in collections.projects | head(6) %}
+                <li><a href="{{ p.url }}"><b>{{ p.data.title }}</b><span>{{ p.data | years }}{% if p.data.sector %} · {{ p.data.sector }}{% endif %}</span></a></li>
+                {%- endfor %}
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li class="has-menu{% if here.startsWith('/apps/') %} current{% endif %}">
+          <a class="top" href="/apps/">Apps</a>
+          <div class="menu">
+            <div class="menu-inner">
+              <a class="menu-lead" href="/apps/"><b>All apps</b><span>Our own apps for iPhone and iPad. Honest, private and native.</span></a>
+              <ul class="menu-list">
+                {%- for a in apps %}
+                <li><a class="with-icon" href="{{ a.url }}"><img src="{{ a.icon }}" alt="" width="36" height="36"><span class="t"><b>{{ a.name }}</b><span>{{ a.blurb }}</span></span></a></li>
+                {%- endfor %}
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li class="has-menu{% if here.startsWith('/services/') %} current{% endif %}">
+          <a class="top" href="/services/">Services</a>
+          <div class="menu">
+            <div class="menu-inner">
+              <a class="menu-lead" href="/services/"><b>All services</b><span>Everything we do for businesses, from first logo to long-term brand care.</span></a>
+              <ul class="menu-list">
+                {%- for s in serviceList %}
+                <li><a href="/services/{{ s.slug }}/"><b>{{ s.name }}</b><span>{{ s.blurb }}</span></a></li>
+                {%- endfor %}
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li class="has-menu{% if here.startsWith('/about/') %} current{% endif %}">
+          <a class="top" href="/about/">About</a>
+          <div class="menu">
+            <div class="menu-inner">
+              <a class="menu-lead" href="/about/"><b>The company</b><span>Started at thirteen in Newcastle. Still sweating the details.</span></a>
+              <ul class="menu-list">
+                <li><a href="/about/skills/"><b>Skills</b><span>What we're good at, and the tools we use.</span></a></li>
+                <li><a href="/about/contact/"><b>Contact</b><span>{{ site.email }}</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li class="cta"><a class="btn small" href="/about/contact/">Get in touch</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>

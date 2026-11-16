@@ -1,0 +1,95 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+# Metro Studio CMS. Sign in at https://metro-studio.co.uk/admin/
+# Every save commits to GitHub; the website rebuilds itself about a minute later.
+
+backend:
+  name: github
+  repo: DaneHamiltonn/metro-studio-site
+  branch: main
+  # Free sign-in with a GitHub access token only (no OAuth server needed).
+  auth_methods: [token]
+  commit_messages:
+    create: "Add project: {{slug}}"
+    update: "Update project: {{slug}}"
+    delete: "Remove project: {{slug}}"
+    uploadMedia: "Upload {{path}}"
+    deleteMedia: "Delete {{path}}"
+
+app_title: Metro Studio CMS
+logo:
+  src: /admin/logo.svg
+site_url: https://metro-studio.co.uk
+display_url: https://metro-studio.co.uk
+
+media_folder: src/assets/img/projects
+public_folder: /assets/img/projects
+
+# Shrink and convert uploaded photos to WebP automatically, so pages stay fast.
+media_libraries:
+  default:
+    config:
+      max_file_size: 10000000
+      transformations:
+        raster_image:
+          format: webp
+          quality: 82
+          width: 2400
+          height: 2400
+
+collections:
+  - name: projects
+    label: Projects
+    label_singular: Project
+    description: Client work shown on /projects. Lower "Order" numbers appear first; the first three appear on the home page.
+    folder: src/projects
+    extension: md
+    format: frontmatter
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    identifier_field: title
+    summary: "{{title}} · {{year_start}} · {{status}}"
+    sortable_fields: [order, title, year_start]
+    preview_path: projects/{{slug}}/
+    thumbnail: cover
+    fields:
+      - { name: title, label: Project name, widget: string }
+      - { name: client, label: Client (full name), widget: string, required: false }
+      - { name: sector, label: Sector, widget: string, required: false, hint: "Short, e.g. Tile retailer" }
+      - { name: headline, label: Headline, widget: string, required: false, hint: "Big title on the project page. Leave empty to use the project name." }
+      - { name: summary, label: Summary, widget: text, hint: "One or two sentences. Shown on cards and at the top of the page." }
+      - { name: year_start, label: Year started, widget: number, value_type: int }
+      - { name: year_end, label: Year ended, widget: string, required: false, hint: "Leave empty or type Present for ongoing work." }
+      - name: status
+        label: Status
+        widget: select
+        options: [Ongoing, Completed, Concept]
+        default: Ongoing
+      - { name: url, label: Website address, widget: string, required: false, hint: "Include https://" }
+      - { name: platform, label: Platform, widget: string, required: false, hint: "e.g. Webflow E-commerce, Squarespace, Custom website" }
+      - name: services
+        label: Services
+        widget: select
+        multiple: true
+        required: false
+        hint: "Projects appear on the matching service pages."
+        options: [Brand design, Graphic design, Web design, App development, Analytics, E-commerce, Content, Marketing, Brand management, Video]
+      - { name: cover, label: Desktop screenshot, widget: image, required: false, hint: "Landscape, ideally 1440×900. Shown in the browser frame." }
+      - { name: mobile, label: Mobile screenshot, widget: image, required: false, hint: "Portrait, ideally 390×844." }
+      - { name: accent, label: Card colour, widget: color, default: "#1c1c1e", hint: "Background colour for this project's card and showcase." }
+      - { name: accent_text, label: Text colour on card, widget: color, default: "#ffffff" }
+      - name: highlights
+        label: Highlights
+        widget: list
+        required: false
+        field: { name: item, label: Highlight, widget: string }
+      - name: gallery
+        label: Gallery
+        widget: list
+        required: false
+        fields:
+          - { name: image, label: Image, widget: image }
+          - { name: caption, label: Caption, widget: string, required: false }
+      - { name: featured, label: Featured, widget: boolean, default: false, required: false }
+      - { name: order, label: Order, widget: number, value_type: int, default: 10, hint: "1 shows first." }
+      - { name: body, label: Case study, widget: markdown, hint: "Use headings like 'The brief', 'What we did', 'Ongoing'." }

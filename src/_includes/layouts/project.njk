@@ -1,0 +1,86 @@
+---
+layout: layouts/base.njk
+---
+{%- set accent = accent or '#1c1c1e' -%}
+{%- set accentText = accent_text or '#ffffff' -%}
+<article class="project" style="--pc: {{ accent }}; --pc-ink: {{ accentText }};">
+
+  <section class="hero project-hero">
+    <div class="wrap">
+      <a class="back reveal" href="/projects/">All projects</a>
+      <span class="eyebrow reveal">{{ client or title }}{% if sector %} · {{ sector }}{% endif %}</span>
+      <h1 class="display reveal d1" style="max-width: 16ch;">{{ headline or title }}</h1>
+      <p class="lede reveal d2">{{ summary }}</p>
+
+      <dl class="facts reveal d3">
+        <div><dt>Years</dt><dd>{{ { year_start: year_start, year_end: year_end, status: status } | years }}</dd></div>
+        <div><dt>Status</dt><dd>{{ status }}</dd></div>
+        {% if platform %}<div><dt>Platform</dt><dd>{{ platform }}</dd></div>{% endif %}
+        {% if url %}<div><dt>Website</dt><dd><a href="{{ url }}" rel="noopener" target="_blank">{{ url | hostname }} ↗</a></dd></div>{% endif %}
+      </dl>
+      {% if services %}<ul class="pc-tags big reveal d3">{% for s in services %}<li>{{ s }}</li>{% endfor %}</ul>{% endif %}
+    </div>
+  </section>
+
+  <section class="project-stage reveal">
+    <div class="wrap">
+      <div class="stage">
+        {% if cover %}
+        <div class="browser large">
+          <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i>{% if url %}<span>{{ url | hostname }}</span>{% endif %}</div>
+          <img src="{{ cover }}" alt="{{ title }} website on desktop" width="1440" height="900">
+        </div>
+        {% endif %}
+        {% if mobile %}
+        <div class="phone stage-phone"><img src="{{ mobile }}" alt="{{ title }} website on a phone" width="390" height="844" loading="lazy"></div>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  <section class="section project-body">
+    <div class="wrap">
+      <div class="project-cols">
+        <div class="prose case">
+          {{ content | safe }}
+        </div>
+        {% if highlights %}
+        <aside class="highlights reveal">
+          <h2>Highlights</h2>
+          <ul>{% for h in highlights %}<li>{{ h }}</li>{% endfor %}</ul>
+          {% if url and status != "Concept" %}<a class="btn" href="{{ url }}" rel="noopener" target="_blank">Visit the website</a>{% endif %}
+        </aside>
+        {% endif %}
+      </div>
+
+      {% if gallery and gallery.length %}
+      <div class="gallery">
+        {% for g in gallery %}
+        <figure class="reveal"><img src="{{ g.image }}" alt="{{ g.caption or title }}" loading="lazy">{% if g.caption %}<figcaption>{{ g.caption }}</figcaption>{% endif %}</figure>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </section>
+
+  {%- set others = collections.projects | without(page.url) -%}
+  {% if others.length %}
+  <section class="section tight" style="background: var(--bg-alt);">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div><span class="eyebrow">More projects</span><h2 class="h2">Keep exploring.</h2></div>
+        <a class="link-arrow" href="/projects/">All projects</a>
+      </div>
+      <div class="project-grid compact">
+        {%- for p in others | head(2) %}
+        {% include "partials/project-card.njk" %}
+        {%- endfor %}
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+</article>
+
+{% set ctaTitle = "Want results like these?" %}
+{% include "partials/contact-cta.njk" %}

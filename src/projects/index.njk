@@ -1,0 +1,33 @@
+---
+layout: layouts/base.njk
+title: Projects
+description: Brand design, web design and e-commerce projects by Metro Studio, from first identity to years of ongoing brand care.
+permalink: /projects/
+eleventyExcludeFromCollections: true
+templateEngineOverride: njk
+---
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow reveal">Projects</span>
+    <h1 class="display reveal d1" style="max-width: 14ch;">Work that keeps <span class="grad-text">working.</span></h1>
+    <p class="lede reveal d2">Most of our clients have been with us for years. We design the brand, build the website, then stay on to keep it all sharp as the business grows.</p>
+    <div class="stat-row reveal d3">
+      <div><b>{{ collections.projects.length }}</b><span>Featured projects</span></div>
+      <div><b>{{ collections.projects | withStatus("Ongoing") | length }}</b><span>Ongoing partnerships</span></div>
+      <div><b>{{ collections.projects | withService("Brand design") | length }}</b><span>Brands designed or refreshed</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top: clamp(56px, 8vw, 96px);">
+  <div class="wrap">
+    <div class="project-grid">
+      {%- for p in collections.projects %}
+      {% include "partials/project-card.njk" %}
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+
+{% set ctaTitle = "Got a project in mind?" %}
+{% include "partials/contact-cta.njk" %}

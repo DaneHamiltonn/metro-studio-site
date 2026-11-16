@@ -1,0 +1,111 @@
+---
+layout: layouts/base.njk
+homepage: true
+permalink: /
+---
+
+  <!-- Hero -->
+  <section class="hero center">
+    <div class="wrap">
+      <svg class="hero-mark mark-l reveal" viewBox="-26 -26 485 352" aria-hidden="true"><use href="#mark"/></svg>
+      <span class="eyebrow reveal">Metro Studio · Newcastle</span>
+      <h1 class="display reveal d1">Beautifully made. <span class="grad-text">Quietly clever.</span></h1>
+      <p class="lede reveal d2">An independent design studio. We build brands for businesses, and apps for everyone.</p>
+      <div class="actions reveal d3">
+        <a class="btn large" href="/projects/">See our work</a>
+        <a class="btn large ghost" href="/services/">What we do</a>
+      </div>
+    </div>
+    <div class="wrap" style="margin-top: clamp(56px, 8vw, 96px);">
+      <div class="phones reveal d2">
+        <div class="phone">
+          <div class="screen mwl-screen" aria-label="MyWashingLine today screen">
+            <div class="loc">Newcastle</div>
+            <div class="sub">Today · Sunny spells</div>
+            <div class="glass score">
+              <div class="ring-wrap"><div class="ring" style="--v:82"></div><div class="num">82</div></div>
+              <div><div class="k">Drying outlook</div><div class="verdict">Put it out</div><div class="k">Dry by 14:30</div></div>
+            </div>
+            <div class="glass"><div class="row"><span class="k">Best window</span><b>10:00 – 16:00</b></div><div class="bar"><i></i></div></div>
+            <div class="glass week">
+              <span>M<b class="g">82</b></span><span>T<b class="a">58</b></span><span>W<b class="r">12</b></span><span>T<b class="g">74</b></span><span>F<b class="a">49</b></span><span>S<b class="g">88</b></span><span>S<b class="a">61</b></span>
+            </div>
+          </div>
+        </div>
+        <div class="phone"><img src="/assets/img/enroute/home-light.png" alt="Enroute: a map of Britain with a train on its way from Newcastle to London King's Cross" width="460" height="1000" fetchpriority="high"></div>
+        <div class="phone"><img src="/assets/img/enroute/passport.png" alt="Enroute Passport: a record of every journey" width="460" height="1000" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Selected work -->
+  <section class="section" style="padding-top: clamp(120px, 14vw, 180px);">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Selected work</span>
+          <h2 class="h1">Brands we build,<br><span class="grad-text">and keep looking after.</span></h2>
+        </div>
+        <a class="link-arrow" href="/projects/">All projects</a>
+      </div>
+      <div class="project-grid">
+        {%- for p in collections.projects | head(3) %}
+        {% include "partials/project-card.njk" %}
+        {%- endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Apps -->
+  <section class="section" style="padding-top: 0;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Our apps</span>
+          <h2 class="h1">Little things,<br><span class="grad-text">done properly.</span></h2>
+        </div>
+        <a class="link-arrow" href="/apps/">All apps</a>
+      </div>
+{% include "partials/app-cards.njk" %}
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section invert">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Services</span>
+          <h2 class="h1">Your brand,<br><span class="grad-text">at its best everywhere.</span></h2>
+        </div>
+        <a class="link-arrow" href="/services/">All services</a>
+      </div>
+      <div class="service-links">
+        {%- for s in serviceList %}
+        <a class="service-link reveal" href="/services/{{ s.slug }}/"><span class="n">0{{ loop.index }}</span><b>{{ s.name }}</b><span class="d">{{ s.blurb }}</span></a>
+        {%- endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Principles -->
+  <section class="section tight">
+    <div class="wrap">
+      {% include "partials/principles.njk" %}
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section" style="padding-top: 0;">
+    <div class="wrap">
+      <div class="reveal" style="max-width: 760px;">
+        <span class="eyebrow">About</span>
+        <h2 class="h1">Started at thirteen.<br><span class="grad-text">Still sweating the details.</span></h2>
+        <p class="lede" style="margin-top: 22px;">Metro Studio began twelve years ago as a teenager's design project in Newcastle. It's grown up a lot since, but the obsession with getting things just right hasn't changed.</p>
+        <div class="actions"><a class="btn large" href="/about/">Our story</a><a class="btn large ghost" href="/about/skills/">Our skills</a></div>
+      </div>
+    </div>
+  </section>
+
+  {% include "partials/contact-cta.njk" %}
