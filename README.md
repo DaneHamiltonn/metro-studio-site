@@ -45,11 +45,11 @@ The old `/enroute/` and `/mywashingline/` addresses redirect to their new homes 
 ## Working on your Mac
 
 ```bash
-cd "/Users/danehamilton/Documents/Metro Studio/Metro Brand" && npm install
+cd path/to/metro-studio-site && npm install
 ```
 
 ```bash
-cd "/Users/danehamilton/Documents/Metro Studio/Metro Brand" && npm start
+cd path/to/metro-studio-site && npm start
 ```
 
 Then open http://localhost:4173. The page reloads as you edit. `npm run build` writes the finished site to `_site.nosync/`. The `.nosync` names, here and on `node_modules.nosync`, stop iCloud from offloading those folders, which otherwise freezes the build.
