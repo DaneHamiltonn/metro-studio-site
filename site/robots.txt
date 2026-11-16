@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://metro-studio.co.uk/sitemap.xml
